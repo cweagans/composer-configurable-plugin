@@ -1,0 +1,24 @@
+{
+  "name": "cweagans/composer-configurable-plugin",
+  "description": "Provides a lightweight configuration system for Composer plugins.",
+  "license": "BSD-2-Clause",
+  "authors": [
+    {
+      "name": "Cameron Eagans",
+      "email": "me@cweagans.net"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "composer/composer": "~1.0",
+    "phpunit/phpunit": "~5.7"
+  },
+  "autoload": {
+    "psr-4": {"cweagans\\Composer\\": "src"}
+  },
+  "autoload-dev": {
+    "psr-4": {"cweagans\\Composer\\Tests\\": "tests"}
+  }
+}
