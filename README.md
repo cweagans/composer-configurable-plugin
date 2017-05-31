@@ -1,5 +1,8 @@
 # cweagans/composer-configurable-plugin
 
+[![Build Status](https://travis-ci.org/cweagans/composer-configurable-plugin.svg?branch=master)](https://travis-ci.org/cweagans/composer-configurable-plugin)
+[![Coverage Status](https://coveralls.io/repos/github/cweagans/composer-configurable-plugin/badge.svg?branch=master)](https://coveralls.io/github/cweagans/composer-configurable-plugin?branch=master)
+
 Provides a lightweight configuration system for Composer plugins. You probably
 don't need to install this unless a plugin requires it.
 
