@@ -1,6 +1,6 @@
 language: php
 sudo: false
-distro: trusty
+dist: trusty
 
 # PHP 5.4 and 5.5 are supported on a best-effort basis and are intentionally
 # not included in the tested versions here, as the dependencies for the testing
