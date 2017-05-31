@@ -125,8 +125,8 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
             // as the second param, any case that doesn't result in a bool
             // should result in the string 'fake'.
             [
-                ',',
-                ['fake'],
+',',
+['fake'],
             ]
         ];
     }
@@ -149,6 +149,47 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
         $plugin->configure([], '');
         $plugin->setConfiguration([]);
         $plugin->getConfig('bad-key');
+    }
+
+    public function testEnvironmentConfiguration()
+    {
+        $plugin = new PluginStub();
+        $plugin->configure([], 'test');
+        $plugin->setConfiguration([
+            'test-string' => [
+                'type' => 'string',
+                'default' => '',
+            ],
+            'test-int' => [
+                'type' => 'int',
+                'default' => 0,
+            ],
+            'test-bool' => [
+                'type' => 'bool',
+                'default' => false,
+            ],
+            'test-list' => [
+                'type' => 'list',
+                'default' => [],
+            ],
+        ]);
+
+        // Config from environment.
+        putenv("TEST_TEST_STRING=qwerty");
+        $this->assertEquals('qwerty', $plugin->getConfig('test-string'));
+        $this->assertTrue(is_string($plugin->getConfig('test-string')));
+
+        putenv("TEST_TEST_INT=123");
+        $this->assertEquals(123, $plugin->getConfig('test-int'));
+        $this->assertTrue(is_int($plugin->getConfig('test-int')));
+
+        putenv("TEST_TEST_BOOL=true");
+        $this->assertEquals(true, $plugin->getConfig('test-bool'));
+        $this->assertTrue(is_bool($plugin->getConfig('test-bool')));
+
+        putenv("TEST_TEST_LIST=asdf,dfgh,hjkl");
+        $this->assertEquals(['asdf', 'dfgh', 'hjkl'], $plugin->getConfig('test-list'));
+        $this->assertTrue(is_array($plugin->getConfig('test-list')));
     }
 
     public function testConfigInheritance()
