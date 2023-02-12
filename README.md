@@ -1,10 +1,15 @@
-# cweagans/composer-configurable-plugin
+# composer-configurable-plugin
 
-[![Build Status](https://travis-ci.org/cweagans/composer-configurable-plugin.svg?branch=master)](https://travis-ci.org/cweagans/composer-configurable-plugin)
-[![Coverage Status](https://coveralls.io/repos/github/cweagans/composer-configurable-plugin/badge.svg?branch=master)](https://coveralls.io/github/cweagans/composer-configurable-plugin?branch=master)
+![Build status](https://github.com/cweagans/composer-configurable-plugin/actions/workflows/ci.yml/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/cweagans/composer-configurable-plugin/badge.svg?branch=main)](https://coveralls.io/github/cweagans/composer-configurable-plugin?branch=main)
 
-Provides a lightweight configuration system for Composer plugins. You probably
-don't need to install this unless a plugin requires it.
+A lightweight configuration system for Composer plugins. You probably don't need to install this manually.
+
+* **Documentation**: https://docs.cweagans.net/composer-configurable-plugin
+* **Issues**: https://github.com/cweagans/composer-configurable-plugin/issues
+* **Support**: https://github.com/cweagans/composer-configurable-plugin/discussions
+
+---
 
 A given configuration value can come from one of three places:
 
@@ -67,5 +72,4 @@ Because this code didn't belong in cweagans/composer-patches.
 
 ## No, I mean why are all the methods public?
 
-Because I didn't want to spend the time to write all the test code for
-protected functions. Patches welcome.
+Because I didn't want to spend the time to write all the test code for protected functions. Patches welcome.

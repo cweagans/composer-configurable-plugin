@@ -14,32 +14,32 @@ trait ConfigurablePlugin {
      *
      * @var array
      */
-    protected $configuration = [];
+    protected array $configuration = [];
 
     /**
      * Holds the 'extra' key from composer.json.
      *
      * @var array
      */
-    protected $extra;
+    protected array $extra;
 
     /**
      * Holds the name of the sub-key in extra to look for this plugin's config.
      *
      * @var string
      */
-    protected $pluginKey;
+    protected string $pluginKey;
 
     /**
      * Set up the ConfigurablePlugin trait.
      *
-     * @param $extra
+     * @param array $extra
      *   The 'extra' section from composer.json.
-     * @param $pluginKey
+     * @param string $pluginKey
      *   The subkey in extra to search for config. This will often be related to
      *   the plugin name. For instance, cweagans/composer-patches uses "patches-config".
      */
-    public function configure($extra, $pluginKey)
+    public function configure(array $extra, string $pluginKey): void
     {
         $this->extra = $extra;
         $this->pluginKey = $pluginKey;
@@ -48,12 +48,12 @@ trait ConfigurablePlugin {
     /**
      * Retrieve a specified configuration value.
      *
-     * @param $key
+     * @param string $key
      *   The configuration key to get a value for.
      * @return string|int|bool|array
      *   The value of the config key.
      */
-    public function getConfig($key)
+    public function getConfig($key): mixed
     {
         // Bail out early if we don't have any information from the plugin or
         // if the requested config key was not described to us.
@@ -61,7 +61,7 @@ trait ConfigurablePlugin {
             throw new \LogicException('You must call ConfigurablePlugin::configure() before attempting to retrieve a config value.');
         }
         if (!array_key_exists($key, $this->configuration)) {
-            throw new \InvalidArgumentException('Config key ' . $key . 'was not declared in $configuration.');
+            throw new \InvalidArgumentException('Config key ' . $key . ' was not declared in $configuration.');
         }
 
         // Start with the default value from configuration.
@@ -104,7 +104,7 @@ trait ConfigurablePlugin {
      * @return string
      *   An envvar-ified version of $key
      */
-    public function getEnvvarName($key)
+    public function getEnvvarName($key): string
     {
         $key = $this->pluginKey . '_' . $key;
         $key = strtoupper($key);
@@ -122,7 +122,7 @@ trait ConfigurablePlugin {
      *
      * @return bool
      */
-    public function castEnvvarToBool($value, $default)
+    public function castEnvvarToBool($value, $default): bool
     {
         // Everything is strtolower()'d because that cuts the number of cases
         // to look for in half.
@@ -154,7 +154,7 @@ trait ConfigurablePlugin {
      *
      * @return array
      */
-    public function castEnvvarToList($value, $default)
+    public function castEnvvarToList($value, $default): array
     {
         // Trim any extra whitespace and then split the string on commas.
         $value = explode(',', trim($value));

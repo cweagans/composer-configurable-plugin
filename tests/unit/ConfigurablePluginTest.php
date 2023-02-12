@@ -2,7 +2,13 @@
 
 namespace cweagans\Composer\Tests;
 
-class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
+//class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
+use InvalidArgumentException;
+use Exception;
+use Error;
+use PHPUnit\Framework\TestCase;
+
+class ConfigurablePluginTest extends TestCase
 {
     public function testDefaultValues()
     {
@@ -45,7 +51,7 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $envvar);
     }
 
-    public function getEnvvarDataProvider()
+    public static function getEnvvarDataProvider()
     {
         return [
             ['a-config-key', "TEST_PACKAGE_A_CONFIG_KEY"],
@@ -69,7 +75,7 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test as many cases for boolean string parsing as possible.
      */
-    public function castEnvvarToBoolDataProvider()
+    public static function castEnvvarToBoolDataProvider()
     {
         return [
             ['FALSE', FALSE],
@@ -110,7 +116,7 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test as many cases for envvar -> array parsing as possible.
      */
-    public function castEnvvarToListDataProvider()
+    public static function castEnvvarToListDataProvider()
     {
         return [
             [
@@ -125,26 +131,22 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
             // as the second param, any case that doesn't result in a bool
             // should result in the string 'fake'.
             [
-',',
-['fake'],
+                ',',
+                ['fake'],
             ]
         ];
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testUnconfigured()
     {
-        $plugin = new PLuginStub();
+        $this->expectException(Error::class);
+        $plugin = new PluginStub();
         $plugin->getConfig('bad-key');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidConfigKey()
     {
+        $this->expectException(InvalidArgumentException::class);
         $plugin = new PluginStub();
         $plugin->configure([], '');
         $plugin->setConfiguration([]);
@@ -220,11 +222,6 @@ class ConfigurablePluginTest extends \PHPUnit_Framework_TestCase
         putenv("TEST_TEST_KEY=qwerty");
         $this->assertEquals('qwerty', $plugin->getConfig('test-key'));
     }
-
-
-
-
-
 }
 
 
