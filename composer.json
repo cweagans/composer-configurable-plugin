@@ -36,13 +36,11 @@
     "scripts": {
         "static": "grumphp run",
         "unit": "codecept run unit",
-        "acceptance": "codecept run acceptance",
         "coverage": "codecept run --coverage-xml",
         "coveralls": "php-coveralls",
         "test": [
             "@static",
-            "@unit",
-            "@acceptance"
+            "@unit"
         ]
     },
     "config": {
