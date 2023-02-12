@@ -34,8 +34,16 @@
         }
     },
     "scripts": {
-        "unit": "phpunit",
-        "coverage": "phpunit --coverage-xml"
+        "static": "grumphp run",
+        "unit": "codecept run unit",
+        "acceptance": "codecept run acceptance",
+        "coverage": "codecept run --coverage-xml",
+        "coveralls": "php-coveralls",
+        "test": [
+            "@static",
+            "@unit",
+            "@acceptance"
+        ]
     },
     "config": {
         "allow-plugins": {
