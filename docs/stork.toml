@@ -1,6 +1,6 @@
 [input]
 base_directory = ""
-url_prefix = "https://docs.cweagans.net/composer-configurable-plugin"
+url_prefix = "/composer-configurable-plugin"
 frontmatter_handling = "Omit"
 files = [
     {path = "_index.md", url = "/", title = "Composer Configurable Plugin"},
