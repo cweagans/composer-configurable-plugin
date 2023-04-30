@@ -85,7 +85,7 @@ class YourPlugin implements PluginInterface
         // all Composer plugins. This string is used for loading configuration from your
         // composer.json and for constructing the name of the environment variables to
         // check for configuration values.
-        $this->configure($composer->getPackage()->getExtraA(), 'unique-key-for-your-plugin');
+        $this->configure($composer->getPackage()->getExtra(), 'unique-key-for-your-plugin');
     }
 
     [...]    
